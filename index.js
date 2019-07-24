@@ -2,13 +2,11 @@
 const express = require ('express');
 //Import the mongoose module
 var mongoose = require('mongoose');
-
 // we call the express function ( invoke )
 const app = express();
 //Set up default mongoose connection
 // Database name --> Capien
 var mongoDB = 'mongodb://127.0.0.1/capien';
-
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 //Get the default connection
@@ -28,12 +26,6 @@ var capien = new Schema({
 var capienModel = mongoose.model('Capien', capien);
 
 
-// server api
-//127.0.0.1/gym/1
-app.get('/', (req, res, next) => {
-    res.send(db.get(req.params.id));
-});
-//
 app.post('/', (req, res, next) => {
     const name = req.params.name;
     const img = req.params.img;
@@ -59,6 +51,14 @@ app.post('/', (req, res, next) => {
     }
     res.end();
 });
+
+// server api
+//127.0.0.1/gym/1
+app.get('/', (req, res, next) => {
+    res.send(db.get(req.params.id));
+});
+//
+
 
 app.listen(3000);
 console.log('Server is running on http://localhost:3000');
